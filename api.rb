@@ -82,6 +82,14 @@ end
 
 # get a matchup for the user
 get '/matchup' do
+  max_range = Restaurant.count
+  
+  option_1_row = Random.rand(max_range) + 1
+  option_2_row = Random.rand(max_range) + 1
+  
+  option_1 = Restaurant.first(:offset => option_1_row)
+  option_2 = Restaurant.first(:offset => option_2_row)
+  
   reply = Hash.new
   
   reply[:restaurant_1] = Hash.new
