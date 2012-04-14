@@ -6,7 +6,7 @@ before do
 end
 
 # create a new user
-get '/' do
+get '/', :provides=> 'json'  do
   "Welcome to the Omaha Food Fight!"
 end
 
