@@ -97,12 +97,14 @@ get '/matchup' do
   reply[:restaurant_1][:address] = option_1.address
   reply[:restaurant_1][:photo] = option_1.photo
   reply[:restaurant_1][:tip] = option_1.tip
+  reply[:restaurant_1][:rating] = option_1.rating
   
   reply[:restaurant_2] = Hash.new
   reply[:restaurant_2][:name] = option_2.name
   reply[:restaurant_2][:address] = option_2.address
   reply[:restaurant_2][:photo] = option_2.photo
   reply[:restaurant_2][:tip] = option_2.tip
+  reply[:restaurant_2][:rating] = option_2.rating
   
   reply.to_json
 end
