@@ -23,11 +23,11 @@ before do
   content_type :json
 end
 
-# create a new user
 get '/' do
   "Welcome to the Omaha Food Fight!"
 end
 
+# create a new user
 post '/user' do
   json = JSON.parse(request.body.read)
 
