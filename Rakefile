@@ -24,4 +24,13 @@ namespace :db do
     ActiveRecord::Migration.verbose = true
     ActiveRecord::Migrator.migrate("db/migrate")
   end
+  
+  desc "Migrate back down"
+  task(:down => :environment) do
+    require 'logger'
+    
+    ActiveRecord::Base.logger = Logger.new(STDOUT)
+    ActiveRecord::Migration.verbose = true
+    ActiveRecord::Migrator.down("db/migrate")
+  end
 end
