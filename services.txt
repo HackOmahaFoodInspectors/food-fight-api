@@ -19,4 +19,58 @@ Response:
   "total" : "254"
 }
 
+Submit matchup results
+POST /matchup
+Request:
+{
+  "email" : "user@example.com",
+  "restauraunt_1" :
+  {
+    "name" : "Restauraunt Company",
+    "address" : "1000 Example Street",
+    "choice" : "winner"
+  },
+  "restaurant_2" :
+  {
+    "name" : "Restauraunt Company",
+    "address" : "1000 Example Street"
+    "choice" : "loser"
+  }
+}
+Response:
+{
+  "restauraunt_1" :
+  {
+    "name" : "Restauraunt Company",
+    "address" : "1000 Example Street",
+    "rating" : "Excellent",
+    "user_rating" : "4.52"
+  },
+  "restaurant_2" :
+  {
+    "name" : "Restauraunt Company",
+    "address" : "1000 Example Street",
+    "rating" : "Excellent",
+    "user_rating" : "4.52"
+  }
+}
 
+Get Matchup
+GET /matchup
+Response
+{
+  "restaraunt_1" :
+  {
+    "name" : "Restauraunt Company",
+    "address" : "1000 Example Street",
+    "photo" : "http://example.com/1.jpg", # May not exist
+    "tip" : "Try the sake! Best wings in the world.", #Do we want this?
+  },
+  "restaurant_2" :
+  {
+    "name" : "Restauraunt Company",
+    "address" : "1000 Example Street",
+    "photo" : "http://example.com/1.jpg", # May not exist
+    "tip" : "Try the sake! Best wings in the world.", #Do we want this?
+  }
+}
