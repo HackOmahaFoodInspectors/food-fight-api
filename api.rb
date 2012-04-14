@@ -35,10 +35,14 @@ post '/user' do
   user = User.first(:conditions => ["name = ?", json["email"]])
   
   if user.nil?
+    logger.info "creating new user " + json["email"]
+    
     user = User.new
     user.name = json["email"]
     user.created_at = DateTime.now
     user.save
+  else
+    logger.warn "user #{user.name} already exits"
   end
   
   reply = Hash.new
@@ -93,6 +97,8 @@ get '/matchup' do
   
   option_1 = Restaurant.first(:offset => option_1_row)
   option_2 = Restaurant.first(:offset => option_2_row)
+  
+  logger.info "sending #{option_1.name} vs #{option_2.name}"
   
   reply = Hash.new
   
