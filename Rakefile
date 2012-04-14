@@ -11,7 +11,8 @@ namespace :db do
       :username => @dbc.user,
       :password => @dbc.password,
       :database => @dbc.path[1..-1],
-      :encoding => 'utf8'
+      :encoding => 'utf8',
+      :min_messages => 'warn'
     )
   end
   
