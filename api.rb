@@ -1,5 +1,18 @@
 require 'sinatra'
 require 'json'
+require 'active_record'
+require 'uri'
+
+@dbc = URI.parse(ENV['DATABASE_URL'] || 'postgres://localhost/food_fight')
+
+ActiveRecord::Base.establish_connection(
+  :adapter  => @dbc.scheme == 'postgres' ? 'postgresql' : @dbc.scheme,
+  :host     => @dbc.host,
+  :username => @dbc.user,
+  :password => @dbc.password,
+  :database => @dbc.path[1..-1],
+  :encoding => 'utf8'
+)
 
 before do
   content_type :json
