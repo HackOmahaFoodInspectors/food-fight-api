@@ -65,6 +65,7 @@ Response
     "address" : "1000 Example Street",
     "photo" : "http://example.com/1.jpg", # May not exist
     "tip" : "Try the sake! Best wings in the world.", #Do we want this?
+    "rating" : "Excellent"
   },
   "restaurant_2" :
   {
@@ -72,5 +73,6 @@ Response
     "address" : "1000 Example Street",
     "photo" : "http://example.com/1.jpg", # May not exist
     "tip" : "Try the sake! Best wings in the world.", #Do we want this?
+    "rating" : "Excellent"
   }
 }

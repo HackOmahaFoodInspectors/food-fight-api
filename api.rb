@@ -87,6 +87,10 @@ get '/matchup' do
   option_1_row = Random.rand(max_range) + 1
   option_2_row = Random.rand(max_range) + 1
   
+  if option_1_row == option_2_row
+    option_2_row = Random.rand(max_range) + 1
+  end
+  
   option_1 = Restaurant.first(:offset => option_1_row)
   option_2 = Restaurant.first(:offset => option_2_row)
   
