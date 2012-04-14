@@ -24,6 +24,7 @@ POST /matchup
 Request:
 {
   "email" : "user@example.com",
+  "user_result" : "winner",
   "restauraunt_1" :
   {
     "name" : "Restauraunt Company",

@@ -31,7 +31,7 @@ end
 post '/user' do
   json = JSON.parse(request.body.read)
   
-  logger.info "recieved user request for #{json}"
+  logger.info "recieved user create request #{json}"
 
   # actually setup of new users goes here, or replying that they are already created
   user = User.first(:conditions => ["name = ?", json["email"]])
