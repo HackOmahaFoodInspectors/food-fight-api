@@ -93,9 +93,9 @@ get '/matchup' do
   reply = Hash.new
   
   reply[:restaurant_1] = Hash.new
-  reply[:restaurant_1][:name] = 'Restaurant Company'
-  reply[:restaurant_1][:address] = '1000 Example Street'
-  reply[:restaurant_1][:photo] = 'http://example.com/1.jpg'
+  reply[:restaurant_1][:name] = option_1.name
+  reply[:restaurant_1][:address] = option_1.address
+  reply[:restaurant_1][:photo] = option_1.image
   reply[:restaurant_1][:tip] = 'Try the Sake! Best Wings in the World!'
   
   reply[:restaurant_2] = Hash.new
