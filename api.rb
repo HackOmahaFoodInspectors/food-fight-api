@@ -85,15 +85,15 @@ get '/matchup' do
   reply = Hash.new
   
   reply[:restaurant_1] = Hash.new
-  reply[:restaurant_1][:name] = 'Restaurant Company'
+  reply[:restaurant_1][:name] = 'Restaurant #1'
   reply[:restaurant_1][:address] = '1000 Example Street'
-  reply[:restaurant_1][:photo] = 'http://example.com/1.jpg'
+  reply[:restaurant_1][:photo] = 'http://deep-ice-5394.heroku.com/food.jpg'
   reply[:restaurant_1][:tip] = 'Try the Sake! Best Wings in the World!'
   
   reply[:restaurant_2] = Hash.new
-  reply[:restaurant_2][:name] = 'Restaurant Company'
-  reply[:restaurant_2][:address] = '1000 Example Street'
-  reply[:restaurant_2][:photo] = 'http://example.com/1.jpg'
+  reply[:restaurant_2][:name] = 'Restaurant #2'
+  reply[:restaurant_2][:address] = '1000 Fake Street'
+  reply[:restaurant_2][:photo] = 'http://deep-ice-5394.heroku.com/food.jpg'
   reply[:restaurant_2][:tip] = 'Try the Sake! Best Wings in the World!'
   
   reply.to_json
