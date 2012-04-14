@@ -1,0 +1,22 @@
+Services the API supports:
+
+Create User:
+PUT /user/create
+Request:
+{
+  "email" : "user@example.com"
+}
+Response:
+{
+  "result" : "ok"
+}
+
+Get Leaderboard/Rankings
+GET /leaderboard/#{emailaddress}
+Response:
+{
+  "ranking" : "35",
+  "total" : "254"
+}
+
+
