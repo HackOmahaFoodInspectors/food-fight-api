@@ -3,6 +3,8 @@ require 'json'
 require 'active_record'
 require 'uri'
 
+require_relative 'models/restaurant'
+
 @dbc = URI.parse(ENV['DATABASE_URL'] || 'postgres://localhost/food_fight')
 
 ActiveRecord::Base.establish_connection(
