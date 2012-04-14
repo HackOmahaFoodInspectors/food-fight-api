@@ -6,11 +6,11 @@ before do
 end
 
 # create a new user
-get '/', :provides=> 'json'  do
+get '/' do
   "Welcome to the Omaha Food Fight!"
 end
 
-post '/user', :provides => 'json' do
+post '/user' do
   json = JSON.parse(request.body.read)
 
   # actually setup of new users goes here, or replying that they are already created
@@ -21,7 +21,7 @@ post '/user', :provides => 'json' do
 end
 
 # get a users ranking
-get '/leaderboard/:email', :provides => 'json' do
+get '/leaderboard/:email' do
   reply = Hash.new
   
   reply[:ranking] = 35
@@ -31,7 +31,7 @@ get '/leaderboard/:email', :provides => 'json' do
 end
 
 # submit the results of a matchup
-post '/matchup', :provides => 'json' do
+post '/matchup' do
   json = JSON.parse(request.body.read)
   
   # actually write out the results of this match
@@ -54,7 +54,7 @@ post '/matchup', :provides => 'json' do
 end
 
 # get a matchup for the user
-get '/matchup', :provides => 'json' do
+get '/matchup' do
   reply = Hash.new
   
   reply[:restaurant_1] = Hash.new
