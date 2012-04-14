@@ -1,7 +1,8 @@
 require 'sinatra'
+require 'json'
 
 post '/user' do
-    @user = params[:id]
+  json = JSON.parse(request.body.read)
     
-    "{ result: '#{@user}' }\n"
+  "{ \"result\" : \"#{json["email"]}\" }\n"
 end
