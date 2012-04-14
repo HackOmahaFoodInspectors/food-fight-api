@@ -3,8 +3,12 @@ class AddRestaurantTable < ActiveRecord::Migration
     create_table :restaurants do |t|
       t.string :name
       t.string :address
-      t.string :photo :nillable => true
-      t.string :tip, :nillable => true
+      t.string :rating
+      t.datetime :inspection_date
+      t.integer :latitude
+      t.integer :longitude
+      t.string :photo
+      t.string :tip
     end
   end
   
