@@ -1,8 +1,12 @@
 require 'sinatra'
 require 'json'
 
+before do
+  content_type :json
+end
+
 # create a new user
-post '/user' do
+post '/user', :provides => 'json' do
   json = JSON.parse(request.body.read)
 
   # actually setup of new users goes here, or replying that they are already created
@@ -13,7 +17,7 @@ post '/user' do
 end
 
 # get a users ranking
-get '/leaderboard/:email' do
+get '/leaderboard/:email', :provides => 'json' do
   reply = Hash.new
   
   reply[:ranking] = 35
@@ -23,7 +27,7 @@ get '/leaderboard/:email' do
 end
 
 # submit the results of a matchup
-post '/matchup' do
+post '/matchup', :provides => 'json' do
   json = JSON.parse(request.body.read)
   
   # actually write out the results of this match
@@ -45,7 +49,8 @@ post '/matchup' do
   reply.to_json
 end
 
-get '/matchup' do
+# get a matchup for the user
+get '/matchup', :provides => 'json' do
   reply = Hash.new
   
   reply[:restaurant_1] = Hash.new
