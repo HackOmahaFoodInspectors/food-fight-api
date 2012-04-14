@@ -82,19 +82,27 @@ end
 
 # get a matchup for the user
 get '/matchup' do
+  max_range = Restaurant.count
+  
+  option_1_row = Random.rand(max_range) + 1
+  option_2_row = Random.rand(max_range) + 1
+  
+  option_1 = Restaurant.first(:offset => option_1_row)
+  option_2 = Restaurant.first(:offset => option_2_row)
+  
   reply = Hash.new
   
   reply[:restaurant_1] = Hash.new
-  reply[:restaurant_1][:name] = 'Restaurant #1'
-  reply[:restaurant_1][:address] = '1000 Example Street'
-  reply[:restaurant_1][:photo] = 'http://deep-ice-5394.heroku.com/food.jpg'
-  reply[:restaurant_1][:tip] = 'Try the Sake! Best Wings in the World!'
+  reply[:restaurant_1][:name] = option_1.name
+  reply[:restaurant_1][:address] = option_1.address
+  reply[:restaurant_1][:photo] = option_1.photo
+  reply[:restaurant_1][:tip] = option_1.tip
   
   reply[:restaurant_2] = Hash.new
-  reply[:restaurant_2][:name] = 'Restaurant #2'
-  reply[:restaurant_2][:address] = '1000 Fake Street'
-  reply[:restaurant_2][:photo] = 'http://deep-ice-5394.heroku.com/food.jpg'
-  reply[:restaurant_2][:tip] = 'Try the Sake! Best Wings in the World!'
+  reply[:restaurant_2][:name] = option_2.name
+  reply[:restaurant_2][:address] = option_2.address
+  reply[:restaurant_2][:photo] = option_2.photo
+  reply[:restaurant_2][:tip] = option_2.tip
   
   reply.to_json
 end
