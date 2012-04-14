@@ -5,8 +5,8 @@ class AddRestaurantTable < ActiveRecord::Migration
       t.string :address
       t.string :rating
       t.datetime :inspection_date
-      t.integer :latitude
-      t.integer :longitude
+      t.decimal :latitude, :precision => 20
+      t.decimal :longitude, :precision => 20
       t.string :photo
       t.string :tip
     end
