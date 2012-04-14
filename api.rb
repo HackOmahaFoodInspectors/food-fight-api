@@ -6,6 +6,10 @@ before do
 end
 
 # create a new user
+get '/' do
+  "Welcome to the Omaha Food Fight!"
+end
+
 post '/user', :provides => 'json' do
   json = JSON.parse(request.body.read)
 
