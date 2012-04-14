@@ -1,5 +1,7 @@
 require 'sinatra'
 
-get '/' do
-    {}
+post '/user' do
+    @user = params[:id]
+    
+    "{ result: '#{@user}' }\n"
 end
