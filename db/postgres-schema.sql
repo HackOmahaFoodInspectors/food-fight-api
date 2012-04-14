@@ -19,3 +19,11 @@ WITH (
 ALTER TABLE restaurants
 OWNER TO matt;
 
+CREATE TABLE users
+(
+ name text,
+ created date,
+ id numeric NOT NULL,
+ CONSTRAINT user_pk PRIMARY KEY (id)
+);
+
