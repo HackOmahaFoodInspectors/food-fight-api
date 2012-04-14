@@ -4,8 +4,9 @@ require 'active_record'
 require 'uri'
 
 require_relative 'models/restaurant'
+require_relative 'models/user'
 
-@dbc = URI.parse(ENV['DATABASE_URL'] || 'postgres://localhost/food_fight')
+@dbc = URI.parse(ENV['DATABASE_URL'] || 'sqlite3:/db/food_fight.sqlite3')
 
 ActiveRecord::Base.establish_connection(
   :adapter  => @dbc.scheme == 'postgres' ? 'postgresql' : @dbc.scheme,
@@ -15,6 +16,8 @@ ActiveRecord::Base.establish_connection(
   :database => @dbc.path[1..-1],
   :encoding => 'utf8'
 )
+
+enable :logging
 
 before do
   content_type :json
@@ -29,8 +32,17 @@ post '/user' do
   json = JSON.parse(request.body.read)
 
   # actually setup of new users goes here, or replying that they are already created
+  user = User.first(:conditions => ["name = ?", json["email"]])
+  
+  if user.nil?
+    user = User.new
+    user.name = json["email"]
+    user.created_at = DateTime.now
+    user.save
+  end
+  
   reply = Hash.new
-  reply[:result] = json["email"]
+  reply[:result] = user.name
   
   reply.to_json
 end
