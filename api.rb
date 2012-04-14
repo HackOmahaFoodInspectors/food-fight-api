@@ -71,34 +71,17 @@ post '/matchup' do
   
   reply = Hash.new
   
-  reply[:restaurant_1] = Hash.new
-  reply[:restaurant_1][:name] = json[:restaurant_1][:name]
-  reply[:restaurant_1][:address] = json[:restaurant_1][:address]
-  reply[:restaurant_1][:rating] = 'EXCELLENT'
-  reply[:restaurant_1][:user_rating] = 4.52
-  
-  reply[:restaurant_2] = Hash.new
-  reply[:restaurant_2][:name] = json[:restaurant_2][:name]
-  reply[:restaurant_2][:address] = json[:restaurant_2][:address]
-  reply[:restaurant_2][:rating] = 'EXCELLENT'
-  reply[:restaurant_2][:user_rating] = 4.52
-  
-  reply.to_json
+  reply[:response] = "ok"
 end
 
 # get a matchup for the user
 get '/matchup' do
-  max_range = Restaurant.count
+  option_1 = Restaurant.get_opponent
+  option_2 = Restaurant.get_opponent
   
-  option_1_row = Random.rand(max_range) + 1
-  option_2_row = Random.rand(max_range) + 1
-  
-  if option_1_row == option_2_row
-    option_2_row = Random.rand(max_range) + 1
+  if option_1 == option_2
+    option_2 = Restaurant.get_opponent
   end
-  
-  option_1 = Restaurant.first(:offset => option_1_row)
-  option_2 = Restaurant.first(:offset => option_2_row)
   
   logger.info "sending #{option_1.name} vs #{option_2.name}"
   

@@ -8,7 +8,7 @@ Request:
 }
 Response:
 {
-  "result" : "ok"
+  "result" : "user@example.com"
 }
 
 Get Leaderboard/Rankings
@@ -40,20 +40,7 @@ Request:
 }
 Response:
 {
-  "restauraunt_1" :
-  {
-    "name" : "Restauraunt Company",
-    "address" : "1000 Example Street",
-    "rating" : "Excellent",
-    "user_rating" : "4.52"
-  },
-  "restaurant_2" :
-  {
-    "name" : "Restauraunt Company",
-    "address" : "1000 Example Street",
-    "rating" : "Excellent",
-    "user_rating" : "4.52"
-  }
+  "result" : "ok"
 }
 
 Get Matchup
@@ -66,7 +53,8 @@ Response
     "address" : "1000 Example Street",
     "photo" : "http://example.com/1.jpg", # May not exist
     "tip" : "Try the sake! Best wings in the world.", #Do we want this?
-    "rating" : "Excellent"
+    "rating" : "Excellent",
+    "user_rating" : "4.52"
   },
   "restaurant_2" :
   {
@@ -74,6 +62,7 @@ Response
     "address" : "1000 Example Street",
     "photo" : "http://example.com/1.jpg", # May not exist
     "tip" : "Try the sake! Best wings in the world.", #Do we want this?
-    "rating" : "Excellent"
+    "rating" : "Excellent",
+	"user_rating" : "4.52"
   }
 }
