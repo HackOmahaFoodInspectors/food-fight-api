@@ -31,7 +31,7 @@ end
 get '/user' do
   users = User.find(:all)
   
-  reply = Array.new
+  reply = []
   
   if users.empty?
     status 404
@@ -208,4 +208,11 @@ get '/matchup' do
   reply[:restaurant_2][:user_rating] = option_2.user_rating
   
   reply.to_json
+end
+
+get '/analytics' do
+  content_type :html
+  restaurants = Restaurant.find(:all)
+  @superior = restaurants.sort_by { |r| r.user_rating }.reverse
+  erb :analytics
 end

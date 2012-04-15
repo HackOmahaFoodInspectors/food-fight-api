@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <h1>Analytics, baby.</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Inspector Rating</th>
+          <th>User Rating</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @superior.each do |r| %>
+          <tr>
+            <td><%= r.name %></td>
+            <td><%= r.rating %></td>
+            <td><%= r.user_rating %></td>
+          </tr>
+        <% end %>
+      </tbody>
+
+  </body>
+</html>
