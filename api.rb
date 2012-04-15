@@ -28,6 +28,7 @@ get '/' do
   "Welcome to the Omaha Food Fight!"
 end
 
+# get all the user info
 get '/user' do
   users = User.find(:all)
   
@@ -206,6 +207,166 @@ get '/matchup' do
   reply[:restaurant_2][:tip] = option_2.tip
   reply[:restaurant_2][:rating] = option_2.rating
   reply[:restaurant_2][:user_rating] = option_2.user_rating
+  
+  reply.to_json
+end
+
+# list all restauarnts
+get '/restaurants' do
+  restaurants = Restaurant.find(:all)
+  
+  reply = Array.new
+  
+  if restaurants.empty?
+    status 404
+  else
+    restaurants.each do |restaurant|
+      reply_entry = Hash.new
+      reply_entry[:name] = restaurant.name
+      reply_entry[:address] = restaurant.address
+      reply_entry[:rating] = restaurant.rating
+      reply_entry[:user_rating] = restaurant.user_rating
+      reply_entry[:wins] = restaurant.wins
+      reply_entry[:losses] = restaurant.losses
+      
+      reply << reply_entry
+    end
+  end
+  
+  reply.to_json
+end
+
+# find restaurants with name
+get '/restaurants/:name' do
+  logger.info "looking up restaurant #{params[:name]}"
+  
+  restaurants = Restaurant.where('name = ?', params[:name].upcase)
+  
+  reply = Array.new
+  
+  if restaurants.empty?
+    status 404
+  else
+    restaurants.each do |restaurant|
+      reply_entry = Hash.new
+      reply_entry[:name] = restaurant.name
+      reply_entry[:address] = restaurant.address
+      reply_entry[:rating] = restaurant.rating
+      reply_entry[:user_rating] = restaurant.user_rating
+      reply_entry[:wins] = restaurant.wins
+      reply_entry[:losses] = restaurant.losses
+      
+      reply << reply_entry
+    end
+  end
+  
+  reply.to_json
+end
+
+# find ratings with restaurants above threshold
+get '/restaurants/rating/:rating' do
+  logger.info "looking up restaurants with rating #{params[:rating]}"
+  
+  restaurants = Restaurant.where("rating = ?", params[:rating].upcase)
+
+  reply = Array.new
+  
+  if restaurants.empty?
+    status 404
+  else
+    restaurants.each do |restaurant|
+      reply_entry = Hash.new
+      reply_entry[:name] = restaurant.name
+      reply_entry[:address] = restaurant.address
+      reply_entry[:rating] = restaurant.rating
+      reply_entry[:user_rating] = restaurant.user_rating
+      reply_entry[:wins] = restaurant.wins
+      reply_entry[:losses] = restaurant.losses
+      
+      reply << reply_entry
+    end
+  end
+  
+  reply.to_json
+end
+
+# find restaurants with ratings below threshold
+get '/restaurants/rating/:rating/above' do
+  logger.info "looking up restaurants with rating above #{params[:rating]}"
+  
+  ratings_list = Array.new
+  
+  ratings_list << "SUPERIOR"
+  
+  if params[:rating].upcase == "FAIR"
+    ratings_list << "FAIR" << "STANDARD" << "EXCELLENT"
+  elsif params[:rating].upcase == "STANARD"
+    ratings_list << "STANDARD" << "EXCELLENT"
+  elsif params[:rating].upcase == "EXCELLENT"
+    ratings_list << "EXCELLENT"
+  end
+  
+  logger.info "rating group is #{ratings_list}"
+  
+  restaurants = Restaurant.where("rating in (?)", ratings_list)
+
+  reply = Array.new
+  
+  if restaurants.empty?
+    status 404
+  else
+    restaurants.each do |restaurant|
+      reply_entry = Hash.new
+      reply_entry[:name] = restaurant.name
+      reply_entry[:address] = restaurant.address
+      reply_entry[:rating] = restaurant.rating
+      reply_entry[:user_rating] = restaurant.user_rating
+      reply_entry[:wins] = restaurant.wins
+      reply_entry[:losses] = restaurant.losses
+      
+      reply << reply_entry
+    end
+  end
+  
+  reply.to_json
+end
+
+get '/restaurants/rating/:rating/below' do
+  logger.info "looking up restaurants with rating below #{params[:rating]}"
+  
+  ratings_list = Array.new
+  
+  ratings_list << "FAIR"
+  
+  if params[:rating].upcase == "STANDARD"
+    ratings_list << "STANDARD"
+  elsif params[:rating].upcase == "EXCELLENT"
+    ratings_list << "STANDARD" << "EXCELLENT"
+  elsif params[:rating].upcase == "SUPERIOR"
+    ratings_list << "STANDARD" << "EXCELLENT" << "SUPERIOR"
+  end
+  
+  logger.info "rating group is #{ratings_list}"
+  
+  restaurants = Restaurant.where("rating in (?)", ratings_list)
+
+  reply = Array.new
+  
+  if restaurants.empty?
+    status 404
+  else
+    restaurants.each do |restaurant|
+      reply_entry = Hash.new
+      reply_entry[:name] = restaurant.name
+      reply_entry[:address] = restaurant.address
+      reply_entry[:rating] = restaurant.rating
+      reply_entry[:user_rating] = restaurant.user_rating
+      reply_entry[:wins] = restaurant.wins
+      reply_entry[:losses] = restaurant.losses
+      
+      reply << reply_entry
+    end
+  end
   
   reply.to_json
 end
