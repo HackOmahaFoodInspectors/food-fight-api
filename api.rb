@@ -228,7 +228,7 @@ get '/restaurants' do
   reply = Array.new
   
   if restaurants.empty?
-    status 404
+    halt 404
   else
     restaurants.each do |restaurant|
       reply_entry = Hash.new
@@ -255,7 +255,7 @@ get '/restaurants/:name' do
   reply = Array.new
   
   if restaurants.empty?
-    status 404
+    halt 404
   else
     restaurants.each do |restaurant|
       reply_entry = Hash.new
@@ -282,7 +282,7 @@ get '/restaurants/rating/:rating' do
   reply = Array.new
   
   if restaurants.empty?
-    status 404
+    halt 404
   else
     restaurants.each do |restaurant|
       reply_entry = Hash.new
@@ -323,7 +323,7 @@ get '/restaurants/rating/:rating/above' do
   reply = Array.new
   
   if restaurants.empty?
-    status 404
+    halt 404
   else
     restaurants.each do |restaurant|
       reply_entry = Hash.new
@@ -363,7 +363,7 @@ get '/restaurants/rating/:rating/below' do
   reply = Array.new
   
   if restaurants.empty?
-    status 404
+    halt 404
   else
     restaurants.each do |restaurant|
       reply_entry = Hash.new
