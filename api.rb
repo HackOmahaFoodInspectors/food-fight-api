@@ -216,8 +216,8 @@ get '/analytics' do
   content_type :html
   restaurants = Restaurant.find(:all).sort! {|x,y| x.user_rating <=> y.user_rating }
   @conflicting = restaurants.select { |r| r.conflicting_ratings? }
-  @top_50 = restaurants.first(50)
-  @bottom_50 = restaurants.last(50).reverse
+  @bottom_50 = restaurants.first(50)
+  @top_50 = restaurants.last(50).reverse
   erb :analytics
 end
 
