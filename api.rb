@@ -2,6 +2,7 @@ require 'sinatra'
 require 'json'
 require 'active_record'
 require 'uri'
+require 'elo'
 
 require_relative 'models/restaurant'
 require_relative 'models/user'
@@ -67,6 +68,24 @@ end
 post '/matchup' do
   json = JSON.parse(request.body.read)
   
+  #update user ratings
+  restaurant_1 = json["restaurant_1"]
+  r1 = Restaurant.where('name = ? and address = ?', restaurant_1["name"], restaurant_1["address"]).first
+  p1 = Elo::Player.new(:rating => r1.user_rating)
+
+  restaurant_2 = json["restaurant_2"]
+  r2 = Restaurant.where('name = ? and address = ?', restaurant_2["name"], restaurant_2["address"]).first
+  p2 = Elo::Player.new(:rating => r2.user_rating)
+
+  if restaurant_1["choice"]== 'winner'
+    p1.wins_from p2
+  else
+    p2.wins_from p1
+  end
+
+  r1.update_attributes!(:user_rating => p1.rating)
+  r2.update_attributes!(:user_rating => p2.rating)
+
   # actually write out the results of this match
   user_result = json["user_result"]
   user_name = json["email"]
