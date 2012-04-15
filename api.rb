@@ -78,7 +78,13 @@ post '/matchup' do
     
     logger.info "updating user #{user.name} (#{user.wins} - #{user.losses}) as #{user_result}"
     
-    user.update_score(user_result)
+    if user_result == 'winner'
+      user.wins += 1
+    else
+      user.losses += 1
+    end
+    
+    user.save
   end
   
   #update user ratings
@@ -88,7 +94,7 @@ post '/matchup' do
   
   r1 = Restaurant.first(:conditions => ['name = ? and address = ?', restaurant_1["name"], restaurant_1["address"]])
   
-  logger.info "updating results for #{r1.name}"
+  logger.info "updating results for #{r1.name} (#{r1.wins} - #{r1.losses})"
   
   p1 = Elo::Player.new(:rating => r1.user_rating)
 
@@ -98,7 +104,7 @@ post '/matchup' do
   
   r2 = Restaurant.first(:conditions => ['name = ? and address = ?', restaurant_2["name"], restaurant_2["address"]])
   
-  logger.info "updating results for #{r2.name}"
+  logger.info "updating results for #{r2.name} (#{r2.wins} - #{r2.losses})"
   
   p2 = Elo::Player.new(:rating => r2.user_rating)
 
@@ -111,8 +117,22 @@ post '/matchup' do
   r1.update_attributes!(:user_rating => p1.rating)
   r2.update_attributes!(:user_rating => p2.rating)
 
-  r1.update_score(restaurant_1["choice"])
-  r2.update_score(restaurant_2["choice"])
+  if restaurant_1["choice"] == 'winner'
+    r1.wins += 1
+  else
+    r1.losses += 1
+  end
+  
+  r1.save
+
+
+  if restaurant_2["choice"] == 'winner'
+    r2.wins += 1
+  else
+    r2.losses += 1
+  end
+  
+  r2.save
   
   reply = Hash.new
   
