@@ -68,13 +68,31 @@ end
 post '/matchup' do
   json = JSON.parse(request.body.read)
   
+  user_result = json["user_result"]
+  user_name = json["email"]
+  
+  # update user score if not anon
+  if user_name != "anon"
+    user = User.first(:conditions => ["name = ?", user_name])
+    
+    logger.info "updating user #{user.name} (#{user.wins} - #{user.losses}) with #{user_result} result"
+    
+    user.update_score(user_result)
+  end
+  
   #update user ratings
   restaurant_1 = json["restaurant_1"]
   r1 = Restaurant.where('name = ? and address = ?', restaurant_1["name"], restaurant_1["address"]).first
+  
+  logger.info "updating results for #{r1}"
+  
   p1 = Elo::Player.new(:rating => r1.user_rating)
 
   restaurant_2 = json["restaurant_2"]
   r2 = Restaurant.where('name = ? and address = ?', restaurant_2["name"], restaurant_2["address"]).first
+  
+  logger.info "updating results for #{r2}"
+  
   p2 = Elo::Player.new(:rating => r2.user_rating)
 
   if restaurant_1["choice"]== 'winner'
@@ -88,19 +106,6 @@ post '/matchup' do
 
   r1.update_score(restaurant_1["choice"])
   r2.update_score(restaurant_2["choice"])
-
-  # actually write out the results of this match
-  user_result = json["user_result"]
-  user_name = json["email"]
-  
-  # update user score if not anon
-  if user_name != "anon"
-    user = User.first(:conditions => ["name = ?", user_name])
-    
-    logger.info "updating user #{user.name} with #{user_result} result"
-    
-    user.update_score(user_result)
-  end
   
   reply = Hash.new
   
