@@ -86,27 +86,21 @@ post '/matchup' do
   r1.update_attributes!(:user_rating => p1.rating)
   r2.update_attributes!(:user_rating => p2.rating)
 
+  r1.update_score(restaurant_1["choice"])
+  r2.update_score(restaurant_2["choice"])
+
   # actually write out the results of this match
   user_result = json["user_result"]
   user_name = json["email"]
   
   # update user score if not anon
   if user_name != "anon"
-    user = User.first(:conditions => ["name = ?", json["email"]])
+    user = User.first(:conditions => ["name = ?", user_name])
     
     logger.info "updating user #{user.name} with #{user_result} result"
     
     user.update_score(user_result)
   end
-  
-  restaurant_1 = Restaurant.first(:conditions => ["name = ? and address = ?", json["restaurant_1"]["name"], 
-                                                          json["restaurant_1"]["address"]])
-                                                          
-  restaurant_2 = Restaurant.first(:conditions => ["name = ? and address = ?", json["restaurant_2"]["name"], 
-                                                          json["restaurant_2"]["address"]])
-  
-  restaurant_1.update_score(json["restaurant_1"]["choice"])
-  restaurant_2.update_score(json["restaurant_2"]["choice"])
   
   reply = Hash.new
   
