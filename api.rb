@@ -28,6 +28,45 @@ get '/' do
   "Welcome to the Omaha Food Fight!"
 end
 
+get '/user' do
+  users = User.find(:all)
+  
+  reply = Array.new
+  
+  if users.empty?
+    status 404
+  else
+    users.each do |user|
+      reply_entry =  Hash.new
+      reply_entry[:email] = user.name
+      reply_entry[:wins] = user.wins
+      reply_entry[:losses] = user.losses
+      reply << reply_entry
+    end
+  end
+  
+  reply.to_json
+end
+
+# get user info
+get '/user/:name' do
+  logger.info "looking up user #{params[:name]}"
+  
+  user = User.first(:conditions => ["name = ?", params[:name]])
+  
+  reply = Hash.new
+  
+  if user.nil?
+    status 404
+  else
+    reply[:email] = user.name
+    reply[:wins] = user.wins
+    reply[:losses] = user.losses
+  end
+  
+  reply.to_json
+end
+
 # create a new user
 post '/user' do
   json = JSON.parse(request.body.read)
