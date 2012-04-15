@@ -237,6 +237,7 @@ get '/restaurants' do
       reply_entry[:address] = restaurant.address
       reply_entry[:rating] = restaurant.rating
       reply_entry[:user_rating] = restaurant.user_rating
+      reply_entry[:calculated_user_rating] = restaurant.calculated_user_rating
       reply_entry[:wins] = restaurant.wins
       reply_entry[:losses] = restaurant.losses
       
@@ -264,6 +265,7 @@ get '/restaurants/:name' do
       reply_entry[:address] = restaurant.address
       reply_entry[:rating] = restaurant.rating
       reply_entry[:user_rating] = restaurant.user_rating
+      reply_entry[:calculated_user_rating] = restaurant.calculated_user_rating
       reply_entry[:wins] = restaurant.wins
       reply_entry[:losses] = restaurant.losses
       
@@ -291,6 +293,7 @@ get '/restaurants/rating/:rating' do
       reply_entry[:address] = restaurant.address
       reply_entry[:rating] = restaurant.rating
       reply_entry[:user_rating] = restaurant.user_rating
+      reply_entry[:calculated_user_rating] = restaurant.calculated_user_rating
       reply_entry[:wins] = restaurant.wins
       reply_entry[:losses] = restaurant.losses
       
@@ -332,6 +335,7 @@ get '/restaurants/rating/:rating/above' do
       reply_entry[:address] = restaurant.address
       reply_entry[:rating] = restaurant.rating
       reply_entry[:user_rating] = restaurant.user_rating
+      reply_entry[:calculated_user_rating] = restaurant.calculated_user_rating
       reply_entry[:wins] = restaurant.wins
       reply_entry[:losses] = restaurant.losses
       
@@ -372,6 +376,7 @@ get '/restaurants/rating/:rating/below' do
       reply_entry[:address] = restaurant.address
       reply_entry[:rating] = restaurant.rating
       reply_entry[:user_rating] = restaurant.user_rating
+      reply_entry[:calculated_user_rating] = restaurant.calculated_user_rating
       reply_entry[:wins] = restaurant.wins
       reply_entry[:losses] = restaurant.losses
       
