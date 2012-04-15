@@ -6,8 +6,10 @@ class User < ActiveRecord::Base
   def update_score(user_result)
     puts self.inspect
     if user_result == 'winner'
+      @wins = 0 if @wins.nil?
       @wins += 1
     else
+      @losses = 0 if @losses.nil?
       @losses += 1
     end
     
