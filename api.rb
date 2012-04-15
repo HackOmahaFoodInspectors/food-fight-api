@@ -99,6 +99,15 @@ post '/matchup' do
     user.update_score(user_result)
   end
   
+  restaurant_1 = Restaurant.first(:conditions => ["name = ? and address = ?", json["restaurant_1"]["name"], 
+                                                          json["restaurant_1"]["address"]])
+                                                          
+  restaurant_2 = Restaurant.first(:conditions => ["name = ? and address = ?", json["restaurant_2"]["name"], 
+                                                          json["restaurant_2"]["address"]])
+  
+  restaurant_1.update_score(json["restaurant_1"]["choice"])
+  restaurant_2.update_score(json["restaurant_2"]["choice"])
+  
   reply = Hash.new
   
   reply[:response] = "ok"

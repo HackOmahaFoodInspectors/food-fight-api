@@ -6,4 +6,14 @@ class Restaurant < ActiveRecord::Base
     
     Restaurant.first(:offset => row)
   end
+  
+  def update_score(decision)
+    if decision == "winner"
+      self.wins += 1;
+    else
+      self.losses += 1;
+    end
+    
+    self.save  
+  end
 end
