@@ -56,10 +56,22 @@ end
 
 # get a users ranking
 get '/leaderboard/:email' do
-  reply = Hash.new
+
+  users = User.find(:all)
+  logger.info users.inspect
+  users.sort do |a,b|
+    logger.info a.inspect
+    logger.info b.inspect
+    w = (a.wins / a.losses) 
+    l = (b.wins / b.losses)
+    w <=> l
+  end
+  ranking = users.find_index {|x| x.name = params[:email]}
+  total = users.count
+  reply = {}
   
-  reply[:ranking] = 35
-  reply[:total] = 254
+  reply[:ranking] = ranking
+  reply[:total] = total
   
   reply.to_json
 end
