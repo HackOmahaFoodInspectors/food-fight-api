@@ -218,6 +218,7 @@ get '/analytics' do
   @conflicting = restaurants.select { |r| r.conflicting_ratings? }
   @bottom_50 = restaurants.first(50)
   @top_50 = restaurants.last(50).reverse
+  @same_store = restaurants.group_by {|x| x.name }.to_a.find_all {|x| x[1].size > 1}.sort_by {|x| x[1].size}.reverse
   erb :analytics
 end
 
