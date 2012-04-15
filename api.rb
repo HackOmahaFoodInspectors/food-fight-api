@@ -68,6 +68,17 @@ post '/matchup' do
   json = JSON.parse(request.body.read)
   
   # actually write out the results of this match
+  user_result = json["user_result"]
+  user_name = json["email"]
+  
+  # update user score if not anon
+  if user_name != "anon"
+    user = User.first(:conditions => ["name = ?", json["email"]])
+    
+    logger.info "updating user #{user.name} with #{user_result} result"
+    
+    user.update_score(user_result)
+  end
   
   reply = Hash.new
   
