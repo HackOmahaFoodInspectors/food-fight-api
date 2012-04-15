@@ -25,7 +25,8 @@ before do
 end
 
 get '/' do
-  "Welcome to the Omaha Food Fight!"
+  content_type :html
+  erb :index
 end
 
 # get all the user info
@@ -213,8 +214,10 @@ end
 
 get '/analytics' do
   content_type :html
-  restaurants = Restaurant.find(:all)
-  @superior = restaurants.sort_by { |r| r.user_rating }.reverse
+  restaurants = Restaurant.find(:all).sort! {|x,y| x.user_rating <=> y.user_rating }
+  @conflicting = restaurants.select { |r| r.conflicting_ratings? }
+  @top_50 = restaurants.first(50)
+  @bottom_50 = restaurants.last(50).reverse
   erb :analytics
 end
 

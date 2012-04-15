@@ -1,24 +1,75 @@
 <!DOCTYPE html>
 <html>
   <body>
-    <h1>Analytics, baby.</h1>
+    <h2>Conflicting inspector/user ratings</h2>
     <table>
       <thead>
         <tr>
           <th>Name</th>
+          <th>Address</th>
           <th>Inspector Rating</th>
           <th>User Rating</th>
+          <th>User Score</th>
         </tr>
       </thead>
       <tbody>
-        <% @superior.each do |r| %>
+        <% @conflicting.each do |r| %>
           <tr>
             <td><%= r.name %></td>
+            <td><%= r.address %></td>
             <td><%= r.rating %></td>
+            <td><%= r.calculated_user_rating %></td>
             <td><%= r.user_rating %></td>
           </tr>
         <% end %>
       </tbody>
+    </table>
+    <h2>Top 50</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Address</th>
+          <th>Inspector Rating</th>
+          <th>User Rating</th>
+          <th>User Score</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @top_50.each do |r| %>
+          <tr>
+            <td><%= r.name %></td>
+            <td><%= r.address %></td>
+            <td><%= r.rating %></td>
+            <td><%= r.calculated_user_rating %></td>
+            <td><%= r.user_rating %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
 
+    <h2>Bottom 50</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Address</th>
+          <th>Inspector Rating</th>
+          <th>User Rating</th>
+          <th>User Score</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @bottom_50.each do |r| %>
+          <tr>
+            <td><%= r.name %></td>
+            <td><%= r.address %></td>
+            <td><%= r.rating %></td>
+            <td><%= r.calculated_user_rating %></td>
+            <td><%= r.user_rating %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
   </body>
 </html>
