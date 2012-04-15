@@ -185,7 +185,7 @@ get '/matchup' do
   option_1 = Restaurant.get_opponent
   option_2 = Restaurant.get_opponent
   
-  if option_1 == option_2
+  while option_1.rating == option_2.rating
     option_2 = Restaurant.get_opponent
   end
   
