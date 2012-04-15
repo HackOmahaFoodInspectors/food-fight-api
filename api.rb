@@ -87,7 +87,7 @@ post '/matchup' do
   
   r1 = Restaurant.first(:conditions => ['name = ? and address = ?', restaurant_1["name"], restaurant_1["address"]])
   
-  logger.info "updating results for #{r1}"
+  logger.info "updating results for #{r1.name}"
   
   p1 = Elo::Player.new(:rating => r1.user_rating)
 
@@ -97,7 +97,7 @@ post '/matchup' do
   
   r2 = Restaurant.first(:conditions => ['name = ? and address = ?', restaurant_2["name"], restaurant_2["address"]])
   
-  logger.info "updating results for #{r2}"
+  logger.info "updating results for #{r2.name}"
   
   p2 = Elo::Player.new(:rating => r2.user_rating)
 

@@ -20,7 +20,7 @@ csv.each do |line|
   restaurant = Restaurant.new
   restaurant.name = line[0].force_encoding('UTF-8')
   restaurant.rating = line[1]
-  restaurant.address = line[3]
+  restaurant.address = line[3].force_encoding('UTF-8')
   restaurant.latitude = line[4]
   restaurant.longitude = line[5]
   restaurant.save
