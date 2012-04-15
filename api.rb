@@ -57,23 +57,12 @@ end
 # get a users ranking
 get '/leaderboard/:email' do
 
-  users = User.find(:all)
-  logger.info users.inspect
-  users.sort do |a,b|
-    logger.info a.inspect
-    logger.info b.inspect
-    w = (a.wins / a.losses) 
-    l = (b.wins / b.losses)
-    w <=> l
-  end
-  ranking = users.find_index {|x| x.name = params[:email]}
-  total = users.count
-  reply = {}
-  
-  reply[:ranking] = ranking
-  reply[:total] = total
-  
-  reply.to_json
+  users = User.find(:all).sort!
+  ranking = users.find_index {|x| x.name == params[:email]}
+  reply = {
+    :ranking => ranking + 1,
+    :total => users.count
+  }.to_json
 end
 
 # submit the results of a matchup
