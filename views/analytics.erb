@@ -42,9 +42,9 @@
           <div class="nav-collapse">
             <ul class="nav">
               <li class="active"><a href="#">Analytics</a></li>
-              <li><a href="#conflicting">Conflicting Ratings</a></li>
               <li><a href="#top50">Top 50</a></li>
               <li><a href="#bottom50">Bottom 50</a></li>
+              <li><a href="#conflicting">Conflicting Ratings</a></li>
               <li><a href="#samestore">Same Store Comparisons</a></li>
             </ul>
           </div><!--/.nav-collapse -->
@@ -54,29 +54,6 @@
 
     <div class="container">
 
-    <h2 id="conflicting">Conflicting inspector/user ratings</h2>
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Address</th>
-          <th>Inspector Rating</th>
-          <th>User Rating</th>
-          <th>User Score</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @conflicting.each do |r| %>
-          <tr>
-            <td><%= r.name %></td>
-            <td><%= r.address %></td>
-            <td><%= r.rating %></td>
-            <td><%= r.calculated_user_rating %></td>
-            <td><%= r.user_rating %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
     <h2 id="top50">Top 50</h2>
     <table class="table table-striped">
       <thead>
@@ -125,6 +102,30 @@
       </tbody>
     </table>
     </div> <!-- /container -->
+
+    <h2 id="conflicting">Conflicting inspector/user ratings</h2>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Address</th>
+          <th>Inspector Rating</th>
+          <th>User Rating</th>
+          <th>User Score</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @conflicting.each do |r| %>
+          <tr>
+            <td><%= r.name %></td>
+            <td><%= r.address %></td>
+            <td><%= r.rating %></td>
+            <td><%= r.calculated_user_rating %></td>
+            <td><%= r.user_rating %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
 
     <h2 id="samestore">Same Store Comparisons</h2>
     <% @same_store.each do |s| %>
