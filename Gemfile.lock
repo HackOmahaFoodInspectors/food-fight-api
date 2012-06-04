@@ -16,6 +16,7 @@ GEM
     elo (0.1.0)
     i18n (0.5.0)
     json_pure (1.6.6)
+    newrelic_rpm (3.3.5)
     pg (0.13.2)
     rack (1.4.1)
     rack-protection (1.2.0)
@@ -34,5 +35,6 @@ DEPENDENCIES
   activerecord (<= 3.0.9)
   elo
   json_pure
+  newrelic_rpm
   pg
   sinatra
