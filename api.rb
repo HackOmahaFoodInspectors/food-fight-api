@@ -7,6 +7,10 @@ require 'elo'
 require_relative 'models/restaurant'
 require_relative 'models/user'
 
+configure :production do 
+  require 'newrelic_rpm'
+end
+
 @dbc = URI.parse(ENV['DATABASE_URL'] || 'sqlite3:/db/food_fight.sqlite3')
 
 ActiveRecord::Base.establish_connection(
